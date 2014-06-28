@@ -1,0 +1,107 @@
+<RTXI class="settings" version="1.3" >
+ <OBJECT component="rt" id="0" >
+  <PARAM name="Period" >200000</PARAM>
+ </OBJECT>
+ <OBJECT component="io" id="1" >
+  <PARAM name="0 Destination ID" >3</PARAM>
+  <PARAM name="0 Destination channel" >0</PARAM>
+  <PARAM name="0 Source ID" >13</PARAM>
+  <PARAM name="0 Source channel" >0</PARAM>
+  <PARAM name="1 Destination ID" >13</PARAM>
+  <PARAM name="1 Destination channel" >0</PARAM>
+  <PARAM name="1 Source ID" >3</PARAM>
+  <PARAM name="1 Source channel" >0</PARAM>
+  <PARAM name="Num Links" >2</PARAM>
+ </OBJECT>
+ <OBJECT component="plugin" library="comedi_driver.so" id="2" >
+  <PARAM name="Num Devices" >0</PARAM>
+ </OBJECT>
+ <OBJECT component="plugin" library="model_loader.so" id="4" />
+ <OBJECT component="plugin" library="dynamo_model_loader.so" id="5" />
+ <OBJECT component="plugin" library="system_control.so" id="6" />
+ <OBJECT component="plugin" library="oscilloscope.so" id="7" >
+  <PARAM name="Num Panels" >1</PARAM>
+  <OBJECT id="14" name="0" >
+   <PARAM name="0 ID" >13</PARAM>
+   <PARAM name="0 index" >0</PARAM>
+   <PARAM name="0 offset" >0</PARAM>
+   <PARAM name="0 pen color" >#ff0000</PARAM>
+   <PARAM name="0 pen style" >1</PARAM>
+   <PARAM name="0 pen width" >1</PARAM>
+   <PARAM name="0 scale" >0.02</PARAM>
+   <PARAM name="0 type" >2</PARAM>
+   <PARAM name="1 ID" >3</PARAM>
+   <PARAM name="1 index" >0</PARAM>
+   <PARAM name="1 offset" >0</PARAM>
+   <PARAM name="1 pen color" >#00ff00</PARAM>
+   <PARAM name="1 pen style" >1</PARAM>
+   <PARAM name="1 pen width" >1</PARAM>
+   <PARAM name="1 scale" >5e-09</PARAM>
+   <PARAM name="1 type" >2</PARAM>
+   <PARAM name="DivT" >200</PARAM>
+   <PARAM name="DivX" >16</PARAM>
+   <PARAM name="DivY" >10</PARAM>
+   <PARAM name="H" >450</PARAM>
+   <PARAM name="Num Channels" >2</PARAM>
+   <PARAM name="Paused" >0</PARAM>
+   <PARAM name="Refresh" >250</PARAM>
+   <PARAM name="Size" >16002</PARAM>
+   <PARAM name="W" >800</PARAM>
+   <PARAM name="X" >361</PARAM>
+   <PARAM name="Y" >417</PARAM>
+  </OBJECT>
+ </OBJECT>
+ <OBJECT component="plugin" library="data_recorder.so" id="8" >
+  <PARAM name="Num Panels" >0</PARAM>
+ </OBJECT>
+ <OBJECT component="plugin" library="connector.so" id="9" />
+ <OBJECT component="plugin" library="performance_measurement.so" id="10" />
+ <OBJECT component="plugin" library="userprefs.so" id="11" />
+ <OBJECT component="plugin" library="clamp_utilities.so" id="12" >
+  <PARAM name="Num Panels" >0</PARAM>
+ </OBJECT>
+ <OBJECT component="plugin" library="PRC.so" id="3" >
+  <PARAM name="Esyn (mV)" >0</PARAM>
+  <PARAM name="Gmax (nS)" >40</PARAM>
+  <PARAM name="H" >456</PARAM>
+  <PARAM name="ISI (ms)" >0</PARAM>
+  <PARAM name="Max Delay (ms)" >850</PARAM>
+  <PARAM name="Min Delay (ms)" >100</PARAM>
+  <PARAM name="Min Interval (s)" >0.005</PARAM>
+  <PARAM name="Period Number" >0</PARAM>
+  <PARAM name="Repeat" >1</PARAM>
+  <PARAM name="Step Size (ms)" >100</PARAM>
+  <PARAM name="Threshold (mV)" >-20</PARAM>
+  <PARAM name="Time (s)" >0</PARAM>
+  <PARAM name="Time Constant tau (ms)" >10</PARAM>
+  <PARAM name="W" >814</PARAM>
+  <PARAM name="X" >9</PARAM>
+  <PARAM name="Y" >8</PARAM>
+  <PARAM name="paused" >1</PARAM>
+ </OBJECT>
+ <OBJECT component="plugin" library="connorstevens.so" id="13" >
+  <PARAM name="Cm (uF/cm^2)" >1</PARAM>
+  <PARAM name="E_A (mV)" >-75</PARAM>
+  <PARAM name="E_K (mV)" >-72</PARAM>
+  <PARAM name="E_L (mV)" >-70</PARAM>
+  <PARAM name="E_Na (mV)" >55</PARAM>
+  <PARAM name="G_A_max (mS/cm^2)" >47.7</PARAM>
+  <PARAM name="G_K_max (mS/cm^2)" >20</PARAM>
+  <PARAM name="G_L (mS/cm^2)" >0.3</PARAM>
+  <PARAM name="G_Na_max (mS/cm^2)" >120</PARAM>
+  <PARAM name="H" >449</PARAM>
+  <PARAM name="Iapp (uA/cm^2)" >24.04</PARAM>
+  <PARAM name="Rate (Hz)" >40000</PARAM>
+  <PARAM name="Time (s)" >215.622</PARAM>
+  <PARAM name="V0 (mV)" >-65</PARAM>
+  <PARAM name="W" >269</PARAM>
+  <PARAM name="X" >88</PARAM>
+  <PARAM name="Y" >418</PARAM>
+  <PARAM name="a" >0.597854</PARAM>
+  <PARAM name="b" >0.101146</PARAM>
+  <PARAM name="h" >0.832443</PARAM>
+  <PARAM name="m" >0.0400628</PARAM>
+  <PARAM name="n" >0.297388</PARAM>
+  <PARAM name="paused" >1</PARAM>
+ </OBJECT>
+</RTXI>
