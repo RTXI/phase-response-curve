@@ -26,12 +26,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #if QT_VERSION >= 0x040300
 #ifdef QT_SVG_LIB
-#include <qsvggenerator.h>
+#include <QSvgGenerator>
 #endif
 #endif
 #if QT_VERSION >= 0x040000
-#include <qprintdialog.h>
-#include <qfileinfo.h>
+#include <QPrintDialog>
+#include <QFileInfo>
 #else
 #include <qwt_painter.h>
 #endif
@@ -73,7 +73,7 @@ static DefaultGUIModel::variable_t vars[] = {
 static size_t num_vars = sizeof(vars) / sizeof(DefaultGUIModel::variable_t);
 
 // Default constructor
-PRC::PRC(void) : DefaultGUIModel("PRC", ::vars, ::num_vars) {
+PRC::PRC(void) : DefaultGUIModel("Phase Response Curve", ::vars, ::num_vars) {
 	setWhatsThis(
 	"<p><b>Phase Response Curve:</b></p><p> This module applies an alpha-shaped conductance to "
 	"the cell at a fixed delay. For the PRC protocol, this occurs after specified number of unperturbed "
@@ -85,6 +85,7 @@ PRC::PRC(void) : DefaultGUIModel("PRC", ::vars, ::num_vars) {
 	"the fixed delays at which to apply the perturbation.<br>"
 	"Measure PRC: Runs the PRC protocol defined by the parameters.<br><br>Input(0): Vm in (V) of the cell "
 	"whose PRC you want to measure.<br><br>Output(0): PRC command current</p>");
+
 	// initialize
 	initParameters();
 	initDelayArray();
@@ -93,6 +94,7 @@ PRC::PRC(void) : DefaultGUIModel("PRC", ::vars, ::num_vars) {
 	customizeGUI();
 	update( INIT );
 	refresh();
+	QTimer::singleShot(0, this, SLOT(resizeMe()));
 	printf("\nPRC Module loaded...\n");
 }
 
@@ -319,8 +321,8 @@ void PRC::update(DefaultGUIModel::update_flags_t flag) {
 					break;
 
 				case PRC_POST:
-					moduleStatus->setText("Measuring PRC... Delay = " + QString::number(
-					delays[stepcount] / 1000) + "s");
+					moduleStatus->setText("Measuring PRC... Delay = " + 
+					                      QString::number(delays[stepcount] / 1000) + "s");
 					break;
 			
 				default:
@@ -386,7 +388,7 @@ void PRC::customizeGUI(void) {
 	saveDataButton->setToolTip("Save PRC data to an ASCII file");
 	printButton->setToolTip("Print plot");
 
-	QObject::connect(this,SIGNAL(drawData(double*,double*,int)),splot,SLOT(appendData(double*,double*,int)));
+	QObject::connect(this, SIGNAL(drawData(double*,double*,int)), splot, SLOT(appendData(double*,double*,int)));
 
 	QGroupBox *baselineBox = new QGroupBox("PRC Functions");
 	QHBoxLayout *baselineBoxLayout = new QHBoxLayout;
@@ -618,19 +620,18 @@ void PRC::clearData() {
 }
 
 void PRC::print() {
-/*
-	#if 1
+#if 1
 	QPrinter printer;
-	#else
+#else
 	QPrinter printer(QPrinter::HighResolution);
-	#if QT_VERSION < 0x040000
+#if QT_VERSION < 0x040000
 	printer.setOutputToFile(true);
 	printer.setOutputFileName("/tmp/PRC.ps");
 	printer.setColorMode(QPrinter::Color);
-	#else
+#else
 	printer.setOutputFileName("/tmp/PRC.pdf");
-	#endif
-	#endif
+#endif
+#endif
 	QString docName = splot->title().text();
 	if (!docName.isEmpty()) {
 		docName.replace(QRegExp(QString::fromLatin1("\n")), tr(" -- "));
@@ -638,12 +639,13 @@ void PRC::print() {
 	}
 	printer.setCreator("PRC Curve");
 	printer.setOrientation(QPrinter::Landscape);
-	#if QT_VERSION >= 0x040000
+#if QT_VERSION >= 0x040000
 	QPrintDialog dialog(&printer);
 	if (dialog.exec()) {
-		#else
+#else
 	if (printer.setup()) {
-			#endif
+#endif
+/*
 		RTXIPrintFilter filter;
 		if (printer.colorMode() == QPrinter::GrayScale) {
 			int options = QwtPlotPrintFilter::PrintAll;
@@ -652,17 +654,19 @@ void PRC::print() {
 			QwtPlotPrintFilter::CanvasBackground);
 			filter.color(Qt::white, QwtPlotPrintFilter::CurveSymbol);
 		}
-		splot->print(printer, filter);
-	}
 */
+//		splot->print(printer, filter);
+		QwtPlotRenderer *renderer = new QwtPlotRenderer;
+		renderer->renderTo(splot, printer);
+	}
 }
 	
 void PRC::exportSVG() {
 	QString fileName = "PRC.svg";
-	#if QT_VERSION < 0x040000
-	#ifndef QT_NO_FILEDIALOG
+#if QT_VERSION < 0x040000
+#ifndef QT_NO_FILEDIALOG
 	fileName = QFileDialog::getSaveFileName("PRC.svg", "SVG Documents (*.svg)", this);
-	#endif
+#endif
 	if (!fileName.isEmpty()) {
 		// enable workaround for Qt3 misalignments
 		QwtPainter::setSVGMode(true);
@@ -672,21 +676,19 @@ void PRC::exportSVG() {
 		p.end();
 		picture.save(fileName, "svg");
 	}
-	#elif QT_VERSION >= 0x040300
-	#ifdef QT_SVG_LIB
-	#ifndef QT_NO_FILEDIALOG
-	fileName = QFileDialog::getSaveFileName(
-	this, "Export File Name", QString(),
-	"SVG Documents (*.svg)");
-	#endif
+#elif QT_VERSION >= 0x040300
+#ifdef QT_SVG_LIB
+#ifndef QT_NO_FILEDIALOG
+	fileName = QFileDialog::getSaveFileName(this, "Export File Name", QString(),"SVG Documents (*.svg)");
+#endif
 	if (!fileName.isEmpty()) {
 		QSvgGenerator generator;
 		generator.setFileName(fileName);
 		generator.setSize(QSize(800, 600));
 		splot->print(generator);
 	}
-	#endif
-	#endif
+#endif
+#endif
 }
 
 void PRC::savePRC() {
@@ -730,14 +732,14 @@ void PRC::togglerandom(bool on) {
 void PRC::togglePlot(bool on) {
 	plotPRC = on;
 	if (on) makeplot();
+	QTimer::singleShot(0, this, SLOT(resizeMe()));
 }
 
 bool PRC::OpenFile(QString FName) {
 	dataFile.setFileName(FName);
 	if (dataFile.exists()) {
-		switch (QMessageBox::warning(this, "PRC", tr(
-		"This file already exists: %1.\n").arg(FName), "Overwrite", "Append",
-		"Cancel", 0, 2)) {
+		switch (QMessageBox::warning(this, "PRC", tr("This file already exists: %1.\n").arg(FName), 
+		                             "Overwrite", "Append", "Cancel", 0, 2)) {
 
 			case 0: // overwrite
 				dataFile.remove();
