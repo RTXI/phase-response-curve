@@ -1,28 +1,27 @@
-PLUGIN_NAME = phase_response_curve
+PLUGIN_NAME = PRC
 
-RTXI_INCLUDES=/usr/local/lib/rtxi_includes
+HEADERS = PRC.h\
+          include/runningstat.h\
+          include/scrollzoomer.h\
+          include/scatterplot.h\
+          include/basicplot.h\
+          include/incrementalplot.h\
+          include/scrollbar.h\
 
-HEADERS = phase-response-curve.h\
-          $(RTXI_INCLUDES)/runningstat.h\
-          $(RTXI_INCLUDES)/basicplot.h\
-          $(RTXI_INCLUDES)/scatterplot.h\
-          $(RTXI_INCLUDES)/incrementalplot.h\
-          $(RTXI_INCLUDES)/scrollbar.h\
-          $(RTXI_INCLUDES)/scrollzoomer.h\
-
-SOURCES = phase-response-curve.cpp \
-          moc_phase-response-curve.cpp\
-          $(RTXI_INCLUDES)/runningstat.cpp\
-          $(RTXI_INCLUDES)/basicplot.cpp\
-          $(RTXI_INCLUDES)/scatterplot.cpp\
-          $(RTXI_INCLUDES)/incrementalplot.cpp\
-          $(RTXI_INCLUDES)/scrollbar.cpp\
-          $(RTXI_INCLUDES)/scrollzoomer.cpp\
-          $(RTXI_INCLUDES)/moc_scatterplot.cpp\
-          $(RTXI_INCLUDES)/moc_incrementalplot.cpp\
-          $(RTXI_INCLUDES)/moc_scrollbar.cpp\
-          $(RTXI_INCLUDES)/moc_scrollzoomer.cpp\
-          $(RTXI_INCLUDES)/moc_basicplot.cpp
+SOURCES = PRC.cpp \
+          moc_PRC.cpp\
+          include/runningstat.cpp\
+          include/basicplot.cpp\
+          include/scatterplot.cpp\
+          include/incrementalplot.cpp\
+          include/scrollbar.cpp\
+          include/scrollzoomer.cpp\
+          include/moc_runningstat.cpp\
+          include/moc_scatterplot.cpp\
+          include/moc_incrementalplot.cpp\
+          include/moc_scrollbar.cpp\
+          include/moc_scrollzoomer.cpp\
+          include/moc_basicplot.cpp
 
 LIBS = -lqwt
 
