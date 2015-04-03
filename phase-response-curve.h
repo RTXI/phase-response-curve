@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <scatterplot.h>
 #include <runningstat.h>
-//#include <plotdialog.h>
+#include <plotdialog.h>
 //#include <RTXIprintfilter.h>
 #include <default_gui_model.h>
 #include <cstdlib>
