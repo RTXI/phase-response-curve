@@ -30,7 +30,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 #endif
 #if QT_VERSION >= 0x040000
-#include <QPrintDialog>
+#include <QtPrintSupport/QPrintDialog>
+#include <QtPrintSupport/QPrinter>
 #include <QFileInfo>
 #else
 #include <qwt_painter.h>
