@@ -17,11 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "phase-response-curve.h"
+
 #include <math.h>
 #include <algorithm>
 #include <time.h>
-
-#include <QtGui>
 #include <sys/stat.h>
 
 #if QT_VERSION >= 0x040300
@@ -29,12 +28,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QSvgGenerator>
 #endif
 #endif
-#if QT_VERSION >= 0x040000
+#if QT_VERSION >= 0x050000
 #include <QtPrintSupport/QPrintDialog>
 #include <QtPrintSupport/QPrinter>
 #include <QFileInfo>
 #else
-#include <qwt_painter.h>
+#include <QPrintDialog>
+#include <QFileInfo>
 #endif
 //#include <qwt_array.h>
 
