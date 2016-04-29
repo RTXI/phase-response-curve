@@ -16,3 +16,26 @@ This screenshot was made using the Connor Stevens model to generate spikes. A co
 This module has a second plotting mode that creates a ts-tr plot of the stimulus times and response times for the perturbed period.
 
 ![PRC (ts-tr)](PRC-tstr.png)
+
+#### Input
+1. input(0) - Vm : Membrane voltage of real cell (V)
+
+#### Output
+1. output(0) - Command : Command perturbation current
+2. output(1) - Cell spike state : Real cell spike state
+
+#### Parameters
+1. Min Delay (ms) - Minimum stimulus delay (ms)
+2. Max Delay (ms) - Maximum stimlus delay (ms)
+3. Step Size (ms) - Step size between minimum and maximum delay (ms)
+4. Gmax (nS) - Maximum synaptic conductance for stimulus
+5. Time Constant tau (ms) - Time constant for alpha-shaped conductance
+6. Esyn (mV) - Reversal potential for stimulus
+7. Repeat - Number of times to run cycle
+8. Threshold (mV) - Threshold (mV) at which to detect a spike
+9. Min Interval (s) - Minimum interval(s) that must pass between spikes
+
+#### States
+1. ISI (ms) - ISI (ms)
+2. Period Number - Period Number
+3. Time (s) - Time
