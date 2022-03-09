@@ -7,7 +7,7 @@ HEADERS = phase-response-curve.h\
 SOURCES = phase-response-curve.cpp \
           moc_phase-response-curve.cpp\
 
-LIBS = -lqwt -lrtplot
+LIBS = -lqwt-qt5 -lrtplot
 
 ### Do not edit below this line ###
 
